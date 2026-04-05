@@ -21,9 +21,9 @@ class Event(models.Model):
         return f"{self.title} at {self.venue}"
 
     class Meta:
-        ordering = ['date'] 
+        ordering = ['date']    # default sort: soonest event first
 
-class Resevation(models.Model):
+class Reservation(models.Model):
     STATUS_CHOICES=[
         ('confirmed','Confirmed'),
         ('cancelled','Cancelled'),
@@ -44,4 +44,4 @@ class Resevation(models.Model):
         return f"{self.attendee_name} - {self.event.title} ({self.seats_reserved} seats)"
 
     class Meta:
-        ordering = ['created_at']   # newest reservation first
+        ordering = ['-created_at']   # newest reservation first
