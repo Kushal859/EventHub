@@ -1,4 +1,5 @@
-EventHub — Backend API for Event Ticketing
+# EventHub — Backend API for Event Ticketing
+
 Why I built this
 EventHub is a backend REST API built to understand how a production-grade ticketing system works under the hood. The core engineering problem it solves is seat reservation management — specifically handling the scenario where two users might try to book the last available seat at the same time.
 Built using:
@@ -9,9 +10,9 @@ SQLite — local database
 Python 3.11
 
 
-How to run the project
+# How to run the project
 Step 1 — clone the repo
-bashgit clone https://github.com/YOUR_USERNAME/EventHub.git
+bashgit clone https://github.com/Kushal859/EventHub.git
 cd EventHub/eventhub
 Step 2 — create and activate virtual environment
 bash# Windows PowerShell
@@ -29,7 +30,7 @@ Step 5 — start the server
 bashpython manage.py runserver
 API is live at http://127.0.0.1:8000/api/
 
-Project structure
+# Project structure
 eventhub/
 ├── eventhub/                 ← Django config package
 │   ├── settings.py           ← INSTALLED_APPS, MIDDLEWARE, database
@@ -50,13 +51,13 @@ eventhub/
 ├── requirements.txt
 └── .gitignore
 
-All API endpoints
+#All API endpoints
 Event endpoints
 MethodURLDescriptionGET/api/events/List all eventsPOST/api/events/Create a new eventGET/api/events/{id}/Get one event by IDPUT/api/events/{id}/Fully update an eventPATCH/api/events/{id}/Partially update an eventDELETE/api/events/{id}/Delete an eventGET/api/events/?status=upcomingFilter events by statusGET/api/events/?venue=mumbaiFilter events by venue
-Reservation endpoints
+# Reservation endpoints
 MethodURLDescriptionGET/api/reservations/List all reservationsPOST/api/reservations/Create a reservationGET/api/reservations/{id}/Get one reservation by IDPOST/api/reservations/{id}/cancel/Cancel a reservationGET/api/reservations/?event_id=1Filter reservations by event
 
-End-to-end test checklist
+# End-to-end test checklist
 Run every test below using Postman. Each one must pass before submission.
 
 TEST 1 — Create an event
@@ -322,9 +323,9 @@ RequestLoggingMiddleware.__call__() runs for every request
 Logs show method, path, status code, and response duration in seconds
 
 
-Design decision — why seat deduction is in the serializer
+# Design decision — why seat deduction is in the serializer
 The brief notes that in production, transaction.atomic() would wrap both writes to prevent race conditions. For this assignment, event.available_seats -= seats_reserved and Reservation.objects.create() are placed inside ReservationSerializer.create(). This keeps both writes in one method so they always travel together — you cannot accidentally create a reservation without deducting seats.
 
-Dependencies
+# Dependencies
 django>=4.2
 djangorestframework>=3.14
